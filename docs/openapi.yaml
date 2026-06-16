@@ -1,0 +1,416 @@
+openapi: 3.0.3
+info:
+  title: Diagrama P2 API
+  version: 1.0.0
+  description: API Node.js + TypeScript baseada no diagrama P2.
+servers:
+  - url: http://localhost:3333/api/v1
+paths:
+  /health:
+    get:
+      tags: [Health]
+      summary: Health check
+      responses:
+        '200':
+          description: OK
+  /situations:
+    get:
+      tags: [Situations]
+      summary: List situations
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Search'
+      responses:
+        '200':
+          description: OK
+    post:
+      tags: [Situations]
+      summary: Create situation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSituation'
+      responses:
+        '201':
+          description: Created
+  /situations/{id}:
+    get:
+      tags: [Situations]
+      summary: Get situation by id
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          description: OK
+    patch:
+      tags: [Situations]
+      summary: Update situation
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSituation'
+      responses:
+        '200':
+          description: OK
+    delete:
+      tags: [Situations]
+      summary: Delete situation
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '204':
+          description: No content
+  /users:
+    get:
+      tags: [Users]
+      summary: List users
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Search'
+      responses:
+        '200':
+          description: OK
+    post:
+      tags: [Users]
+      summary: Create user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUser'
+      responses:
+        '201':
+          description: Created
+  /users/{id}:
+    get:
+      tags: [Users]
+      summary: Get user by id
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          description: OK
+    patch:
+      tags: [Users]
+      summary: Update user
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateUser'
+      responses:
+        '200':
+          description: OK
+    delete:
+      tags: [Users]
+      summary: Delete user
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '204':
+          description: No content
+  /product-categories:
+    get:
+      tags: [Product Categories]
+      summary: List product categories
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Search'
+      responses:
+        '200':
+          description: OK
+    post:
+      tags: [Product Categories]
+      summary: Create product category
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateNamedResource'
+      responses:
+        '201':
+          description: Created
+  /product-categories/{id}:
+    get:
+      tags: [Product Categories]
+      summary: Get product category by id
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          description: OK
+    patch:
+      tags: [Product Categories]
+      summary: Update product category
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateNamedResource'
+      responses:
+        '200':
+          description: OK
+    delete:
+      tags: [Product Categories]
+      summary: Delete product category
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '204':
+          description: No content
+  /product-situations:
+    get:
+      tags: [Product Situations]
+      summary: List product situations
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Search'
+      responses:
+        '200':
+          description: OK
+    post:
+      tags: [Product Situations]
+      summary: Create product situation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateNamedResource'
+      responses:
+        '201':
+          description: Created
+  /product-situations/{id}:
+    get:
+      tags: [Product Situations]
+      summary: Get product situation by id
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          description: OK
+    patch:
+      tags: [Product Situations]
+      summary: Update product situation
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateNamedResource'
+      responses:
+        '200':
+          description: OK
+    delete:
+      tags: [Product Situations]
+      summary: Delete product situation
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '204':
+          description: No content
+  /products:
+    get:
+      tags: [Products]
+      summary: List products
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Search'
+        - in: query
+          name: productCategoryId
+          schema:
+            type: integer
+        - in: query
+          name: productSituationId
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+    post:
+      tags: [Products]
+      summary: Create product
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateProduct'
+      responses:
+        '201':
+          description: Created
+  /products/{id}:
+    get:
+      tags: [Products]
+      summary: Get product by id
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          description: OK
+    patch:
+      tags: [Products]
+      summary: Update product
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateProduct'
+      responses:
+        '200':
+          description: OK
+    delete:
+      tags: [Products]
+      summary: Delete product
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '204':
+          description: No content
+components:
+  parameters:
+    Id:
+      in: path
+      name: id
+      required: true
+      schema:
+        type: integer
+    Page:
+      in: query
+      name: page
+      schema:
+        type: integer
+        default: 1
+    Limit:
+      in: query
+      name: limit
+      schema:
+        type: integer
+        default: 10
+    Search:
+      in: query
+      name: search
+      schema:
+        type: string
+  schemas:
+    CreateSituation:
+      type: object
+      required: [nameSituation]
+      properties:
+        nameSituation:
+          type: string
+          example: Ativo
+    UpdateSituation:
+      type: object
+      properties:
+        nameSituation:
+          type: string
+          example: Inativo
+    CreateNamedResource:
+      type: object
+      required: [name]
+      properties:
+        name:
+          type: string
+          example: Geral
+    UpdateNamedResource:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Novo nome
+    CreateUser:
+      type: object
+      required: [name, email, password, situationId]
+      properties:
+        name:
+          type: string
+          example: Victor Fernandes
+        email:
+          type: string
+          example: victor@example.com
+        password:
+          type: string
+          example: '123456'
+        recoverPassword:
+          type: string
+          nullable: true
+        situationId:
+          type: integer
+          example: 1
+    UpdateUser:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        recoverPassword:
+          type: string
+          nullable: true
+        situationId:
+          type: integer
+    CreateProduct:
+      type: object
+      required: [name, slug, price, productSituationId, productCategoryId]
+      properties:
+        name:
+          type: string
+          example: Produto exemplo
+        slug:
+          type: string
+          example: produto-exemplo
+        description:
+          type: string
+          nullable: true
+        price:
+          type: number
+          example: 99.9
+        productSituationId:
+          type: integer
+          example: 1
+        productCategoryId:
+          type: integer
+          example: 1
+    UpdateProduct:
+      type: object
+      properties:
+        name:
+          type: string
+        slug:
+          type: string
+        description:
+          type: string
+          nullable: true
+        price:
+          type: number
+        productSituationId:
+          type: integer
+        productCategoryId:
+          type: integer
