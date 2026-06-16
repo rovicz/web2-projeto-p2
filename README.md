@@ -1,4 +1,4 @@
-# API Universidade - Projeto P1
+# API Universidade - Projeto P2
 
 API Node.js + TypeScript baseada no diagrama de banco.
 
